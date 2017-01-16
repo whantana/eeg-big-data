@@ -1,0 +1,41 @@
+# start HDFS,hbase
+start-all.sh ; start-hbase.sh
+
+# start opentsdb
+tsdtmp=${TMPDIR-'/tmp'}/tsd
+mkdir -p $tsdtmp
+./build/tsdb tsd --port=4242 --staticroot=build/staticroot --cachedir="$tsdtmp"
+
+# make metrics
+./build/tsdb mkmetric Fc5 Fc3 Fc1 Fcz Fc2 Fc4 Fc6
+./build/tsdb mkmetric C5 C3 C1 Cz C2 C4 C6
+./build/tsdb mkmetric Cp5 Cp3 Cp1 Cpz Cp2 Cp4 Cp6
+./build/tsdb mkmetric Fp1 Fpz Fp2
+./build/tsdb mkmetric Af7 Af3 Afz Af4 Af8 F7 F5 F3 F1
+./build/tsdb mkmetric Fz F2 F4 F6 F8 Ft7 Ft8 T7 T8 T9 T10
+./build/tsdb mkmetric Tp7 Tp8
+./build/tsdb mkmetric P7 P5 P3 P1 Pz P2 P4 P6 P8 Po7 Po3 Poz Po4 Po8 
+./build/tsdb mkmetric O1 Oz O2
+./build/tsdb mkmetric Iz
+./build/tsdb mkmetric EDF_Annotations
+
+# import data
+./build/tsdb import /Users/whantana/whantana.projects/eeg-opentsdb-data/data/1S/TSDB_S001_R01.txt
+
+# times
+# 1250266500000 => 2009/08/14-19:15:00.000
+# 1250266500294 => 2009/08/14-19:15:00.294 
+#
+
+# exact ascii
+http://localhost:4242/q?start= 1250266500000&end= 1250266500294&m=sum:Fp1{sid=S001,rid=R01}&ascii&exact&nocache
+
+# non exact ascii
+http://localhost:4242/q?start=1250266500000&end=1250266518588&m=sum:Fp1{sid=S001,rid=R01}&ascii&nocache
+
+# exact png
+http://localhost:4242/q?start=1250266500000&end=1250266518588&m=sum:Fp1{sid=S001,rid=R01}&png&exact&nocache
+
+# non exact
+http://localhost:4242/q?start=1250266500000&end=1250266518588&m=sum:Fp1{sid=S001,rid=R01}&png&nocache
+

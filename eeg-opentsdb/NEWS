@@ -1,0 +1,55 @@
+OpenTSDB - User visible changes.
+
+* Version 1.1.0 (2013-01-??) [???????]
+
+Noteworthy changes:
+  - Licensing adjustment: allow LGPLv2.1+ in addition to LGPLv3+.
+  - Various fixes used when customizing size of UniqueId.  The default size
+    is 3 bytes and is a compile-time constant rarely changed in practice.
+  - New a new standard deviation aggregator, `dev'.
+  - New `fgcolor', `bgcolor' and `smooth' query parameters to /q.
+  - New `tz' query string parameter to allow specifying a custom time zone.
+  - Stop accepting connections when shutting down.
+  - A new `dropcaches' administrative command allows discarding in-memory
+    caches.  Right now these are UID mappings.
+  - Browser history support in the web UI.
+  - Allow "1d-ago" style input in date boxes.
+  - Fix the 30d integer overflow in the web UI.
+  - Add the ability to use mouse for drag-to-zoom on graphs.
+  - Integration with Maven.
+  - Work around a Netty performance bug, increasing write throughput by 10x.
+  - Properly parse floating point values in scientific notations.
+  - Allow tuning the number of worker threads or using OIO.
+  - Fix auto-completion bug causing partial results to show in the web UI.
+  - Various internal bug fixes.
+
+
+* Version 1.0.0 (2011-12-23) [66a6b42]
+
+Initial release:
+  - Upload data points through a telnet-style protocol.
+  - HTTP interface to query data in ASCII and PNG.
+  - Efficient, fully asynchronous write path.
+  - Synchronous / blocking read path (to be rewritten).
+  - TSDB data compaction (disabled by default).
+
+-----
+
+Copyright (C) 2011-2012  The OpenTSDB Authors.
+
+This library is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 2.1 of the License, or
+(at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this library.  If not, see <http://www.gnu.org/licenses/>.
+
+Local Variables:
+mode: outline
+End:
